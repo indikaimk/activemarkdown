@@ -7,7 +7,12 @@ gem "puma"
 
 gem "sqlite3"
 
+gem "redcarpet", "~> 3.6"
+
 gem "sprockets-rails"
+
+gem "stimulus-rails"
+
 
 # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
 gem "rubocop-rails-omakase", require: false
