@@ -11,6 +11,8 @@ gem "redcarpet", "~> 3.6"
 
 gem "sprockets-rails"
 
+gem "importmap-rails"
+
 gem "stimulus-rails"
 
 
