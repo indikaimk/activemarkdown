@@ -2,7 +2,7 @@ module ActiveMarkdown
   class Document < ApplicationRecord
     
     after_create do |document|
-      fragment = Fragment.new
+      fragment = Fragment.new(content: "Start writing...")
       fragment.document = document
       fragment.save
     end

@@ -1,3 +1,5 @@
+require 'redcarpet'
+
 module ActiveMarkdown
   class Fragment < ApplicationRecord
     belongs_to :document
@@ -7,8 +9,9 @@ module ActiveMarkdown
       if self.content
         #todo: Initialize this once per app and reuse
         renderer = Redcarpet::Render::HTML.new(hard_wrap: true)
-        markdown = Redcarpet::Markdown.new(renderer, extensions = {})
-        return markdown.render(self.content)
+        markdown = Redcarpet::Markdown.new(renderer, autolink: true, tables: true)
+
+        return markdown.render self.content
       else
         return ""
       end

@@ -3,6 +3,7 @@ PATH
   specs:
     active_markdown (0.1.0)
       rails (>= 7.2.1.2)
+      redcarpet (~> 3.6)
 
 GEM
   remote: https://rubygems.org/
@@ -91,7 +92,7 @@ GEM
       activesupport (>= 6.1)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
-    importmap-rails (2.0.1)
+    importmap-rails (2.0.3)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
       railties (>= 6.0.0)

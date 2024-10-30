@@ -23,4 +23,5 @@ Gem::Specification.new do |spec|
   end
 
   spec.add_dependency "rails", ">= 7.2.1.2"
+  spec.add_dependency "redcarpet", "~> 3.6"
 end
