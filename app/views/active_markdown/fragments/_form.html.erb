@@ -1,0 +1,22 @@
+
+<turbo-frame id="fragment-<%= fragment.id %>" target="document">
+  <div data-controller="editable" data-action="click->editable#click 
+                                               blur->editable#blur 
+                                               keydown.enter->editable#saveAndAddFragment">
+    
+    <%= form_with(model: fragment, url: active_markdown.fragment_path(fragment), method: "patch") do |form| %>
+      <%= form.text_field :position, hidden: true, class: "fragment-position" %>
+      <%= form.text_area :content, hidden: true, class: "fragment-content" %>
+      <%= form.check_box :is_new, checked: fragment.is_new?, hidden: true, class: "new-fragment-flag" %>
+      <%= form.submit "enter-key", hidden: true, class: "enter-key-button" %>
+    <% end %>   
+    <div>
+      
+    </div> 
+    <span class="fragment-markdown">
+      <%= sanitize fragment.render %>  
+    </span>
+    
+  </div>
+
+</turbo-frame>

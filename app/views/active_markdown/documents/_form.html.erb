@@ -1,0 +1,7 @@
+<turbo-frame id="document">
+  <div>
+    <% document.fragments.by_position.each do |fragment| %>
+      <%= render partial: "active_markdown/fragments/form", locals: {fragment: fragment} %>
+    <% end %>
+  </div>
+</turbo-frame>

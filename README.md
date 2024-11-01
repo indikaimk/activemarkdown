@@ -21,6 +21,17 @@ Or install it yourself as:
 $ gem install active_markdown
 ```
 
+Install `turndown`, the JavaScript library for converting HTML to Markdown.
+```bash
+$ ./bin/importmap pin turndown
+```
+
+Add to the `application.css` to include stylesheets in active_markdown.
+```css
+ *= require active_markdown/application
+
+```
+
 ## Contributing
 Contribution directions go here.
 

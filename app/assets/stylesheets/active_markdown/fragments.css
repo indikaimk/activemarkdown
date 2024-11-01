@@ -1,0 +1,10 @@
+.fragment-markdown{
+  display: inline-block;
+  min-width: 100px;
+  color: blue;
+  border-color: none;
+}
+
+[contenteditable] {
+  outline: 0px solid transparent;
+}
