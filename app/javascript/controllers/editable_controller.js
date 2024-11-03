@@ -2,46 +2,58 @@ import {turndownService} from "../lib/turndown_service"
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  connect() {
-    let isNew = this.element.querySelector(".new-fragment-flag").checked
-    console.log(isNew)
+  static classes = ["selected"]
 
+  connect() {
+    let isNew = this.element.parentElement.querySelector(".new-fragment-flag").checked
     if (isNew == 1) {
-      console.log(isNew)
-      let editableComponent = this.element.querySelector(".fragment-markdown p")
-      editableComponent.setAttribute("contenteditable", "true")
-      editableComponent.focus()      
+      this.enableEditing()
+
     }
   }
   
   saveAndAddFragment(event) {
-    // if (event.keyCode == 13) {
-    //   event.preventDefault()
-    //   this.element.removeAttribute("contenteditable")
-    // }
     event.preventDefault()
-    this.element.removeAttribute("contenteditable")
-
-    let markdown = turndownService().turndown(this.element)
-    this.element.querySelector(".fragment-content").value = markdown
-
-    let submitButton = this.element.querySelector(".enter-key-button")
-    this.element.querySelector("form").requestSubmit(submitButton)
-
+    this.disableEditing()
+    this.updateForm()
+    let submitButton = this.element.parentElement.querySelector(".enter-key-button")
+    this.submitForm(submitButton)
   }
 
   click(event) {
-    this.element.setAttribute("contenteditable", "true")
-    this.element.focus()
+    this.enableEditing()
   }
 
-  // blur(event) {
-  //   this.element.removeAttribute("contenteditable")
-  //   let markdown = turndownService().turndown(this.element)
-  //   this.element.querySelector(".fragment-content").value = markdown
-  //   this.element.querySelector("form").requestSubmit()
-  // }
+  blur(event) {
+    this.disableEditing()
+    this.updateForm()
+    this.submitForm()
+  }
 
+  enableEditing() {
+    let editableComponent = this.element //.querySelector("p")
+    editableComponent.setAttribute("contenteditable", "true")
+    editableComponent.focus()  
+  }
 
+  disableEditing() {
+    this.element.removeAttribute("contenteditable")
+  }
 
+  updateForm(){
+    this.element.parentElement.querySelector(".fragment-content").value = this.getMarkdown()
+  }
+
+  getMarkdown(){
+    // return turndownService().turndown(this.element.querySelector(".fragment-markdown"))
+    return turndownService().turndown(this.element)
+  }
+
+  submitForm(submitButton) {
+    if (submitButton) {
+      this.element.parentElement.querySelector("form").requestSubmit(submitButton)
+    } else {
+      this.element.parentElement.querySelector("form").requestSubmit()
+    }
+  }
 }

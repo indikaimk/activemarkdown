@@ -26,6 +26,11 @@ Install `turndown`, the JavaScript library for converting HTML to Markdown.
 $ ./bin/importmap pin turndown
 ```
 
+Install tippy.
+```bash
+$ ./bin/importmap pin tippy.js
+```
+
 Add to the `application.css` to include stylesheets in active_markdown.
 ```css
  *= require active_markdown/application

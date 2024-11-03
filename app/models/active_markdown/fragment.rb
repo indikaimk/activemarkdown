@@ -6,6 +6,17 @@ module ActiveMarkdown
 
     scope :by_position, -> { order(position: :asc) }
 
+    MD_MAP = {
+      "h1" => "# %{data}",
+      "h2" => "## %{data}",
+      "h3" => "### %{data}",
+      "p" => "%{data}",
+      "ol" => "%{data}",
+      "ul" => "%{data}",
+      "pre" => "```%{meta}\n%{data}\n```",
+      "img" => "![%{meta}](%{data})"
+    }
+
     def render 
       # self.content = "# Test"
       if self.content

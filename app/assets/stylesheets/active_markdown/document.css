@@ -1,0 +1,17 @@
+.toolbar{
+  margin: 0;
+  list-style-type: none;
+}
+
+.toolbar li {
+  text-decoration: none;
+  
+}
+
+.toolbar li:hover{
+  background-color: #b1b1b1;
+}
+
+.toolbar li a{
+  text-decoration: none;
+}

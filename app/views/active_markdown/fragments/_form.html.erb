@@ -1,19 +1,44 @@
 
 <turbo-frame id="fragment-<%= fragment.id %>" target="document">
-  <div data-controller="editable" data-action="click->editable#click 
-                                               blur->editable#blur 
-                                               keydown.enter->editable#saveAndAddFragment">
+
+  <div>
     
     <%= form_with(model: fragment, url: active_markdown.fragment_path(fragment), method: "patch") do |form| %>
       <%= form.text_field :position, hidden: true, class: "fragment-position" %>
+
       <%= form.text_area :content, hidden: true, class: "fragment-content" %>
       <%= form.check_box :is_new, checked: fragment.is_new?, hidden: true, class: "new-fragment-flag" %>
       <%= form.submit "enter-key", hidden: true, class: "enter-key-button" %>
     <% end %>   
-    <div>
-      
-    </div> 
-    <span class="fragment-markdown">
+
+
+    <a href="" data-controller="fragment" data-action="fragment#toggleChangeMenu" class="fragment-menu-button">
+      <span class="material-symbols-outlined">
+        drag_indicator
+      </span>
+    </a>
+    <ul class="frgment-menu" data-fragment-target="change-menu">
+
+    </ul>
+    <!-- <ul class="fragment-menu">
+      <li>
+        <a href="" data-controller="fragment" data-action="click->fragment#convertToText" >Text</a>
+      </li>
+      <li>
+        <a href="" data-controller="fragment" data-action="click->fragment#convertToH1">Heading 1</a>
+      </li>
+      <li>
+        <a href="">Heading 2</a>
+      </li>
+      <li>
+        <a href="">Heading 3</a>
+      </li>
+    </ul> -->
+    <span class="fragment-markdown" data-controller="editable" 
+                                    data-action="click->editable#click 
+                                                blur->editable#blur 
+                                                keydown.enter->editable#saveAndAddFragment" 
+                                    data-editable-element="<%= fragment.element %>" >
       <%= sanitize fragment.render %>  
     </span>
     
