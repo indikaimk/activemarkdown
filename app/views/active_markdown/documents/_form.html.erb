@@ -1,9 +1,10 @@
 <nav>
   <ul class="toolbar">
     <li>
-      <a href=""  data-controller="editable" data-action="click->editable#convertTo" 
-                  data-editable-target-element="h1" 
-                  data-editable-selected-class="not-selected">
+      <a href=""  data-controller="editable" 
+                  data-action="click->editable#convertTo mousedown->editable#mouseDown" 
+                  data-editable-convert-type-value="h1" 
+                  data-editable-header1-class="not-selected">
         <span class="material-symbols-outlined">
           format_h1
         </span>

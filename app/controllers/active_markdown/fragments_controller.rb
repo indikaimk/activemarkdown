@@ -28,7 +28,7 @@ module ActiveMarkdown
       end
 
       def fragment_params 
-        params.require(:fragment).permit(:position, :content, :is_new)
+        params.require(:fragment).permit(:position, :content, :is_new, :element)
       end
   end
 end

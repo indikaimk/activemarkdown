@@ -3,6 +3,9 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static classes = ["selected"]
+  static values = {
+    convertType: String
+  }
 
   connect() {
     let isNew = this.element.parentElement.querySelector(".new-fragment-flag").checked
@@ -24,10 +27,25 @@ export default class extends Controller {
     this.enableEditing()
   }
 
+  mouseDown(event){
+    event.preventDefault();
+    event.stopPropogation();
+
+  }
+
+
   blur(event) {
     this.disableEditing()
     this.updateForm()
     this.submitForm()
+  }
+
+  convertTo(event){
+    let activeFragmemt = document.activeElement
+    console.log(activeFragmemt)
+    activeFragmemt.parentElement.querySelector(".fragment-element").value = this.convertTypeValue
+    // activeFragmemt.parentElement.querySelector(".fragment-content").value = this.getMarkdown()
+    // activeFragmemt.parentElement.querySelector("form").requestSubmit()
   }
 
   enableEditing() {

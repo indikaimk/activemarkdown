@@ -17,21 +17,24 @@ module ActiveMarkdown
       "img" => "![%{meta}](%{data})"
     }
 
-    def render 
-      # self.content = "# Test"
-      if self.content
-        if self.content == ""
-          return "<p></p>"
-        else
-          #todo: Initialize this once per app and reuse
-          renderer = Redcarpet::Render::HTML.new(hard_wrap: true)
-          markdown = Redcarpet::Markdown.new(renderer, autolink: true, tables: true)
+    HTML_MAP = {
+      h1: "<h1>%{content}</h1>"
+    }
 
-          return markdown.render self.content
-        end
-      else
-        return ""
+    # Render fragment as HTML
+    def render 
+      return "" unless self.content
+      return "<p></p>" if self.content == ""
+      
+      if self.element.
+
+        #todo: Initialize this once per app and reuse
+        renderer = Redcarpet::Render::HTML.new(hard_wrap: true)
+        markdown = Redcarpet::Markdown.new(renderer, autolink: true, tables: true)
+
+        return markdown.render self.content
       end
+
     end
   end
 end

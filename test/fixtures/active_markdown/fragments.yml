@@ -1,8 +1,8 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+blank:
   element: MyString
-  content: MyText
+  content: ""
   position: 1
   meta: MyString
 
