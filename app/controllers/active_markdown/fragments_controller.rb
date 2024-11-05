@@ -15,8 +15,10 @@ module ActiveMarkdown
       # If user press enter key, insert new fragment below
       if params[:commit] == "enter-key"
         @document.add_new_fragment(@fragment.position)
+        redirect_to edit_document_path(@document)
+      else
+        redirect_to edit_fragment_path(@fragment)
       end
-      redirect_to edit_document_path(@document)
 
       # redirect_to main_app.edit_article_path(@fragment.document)
     end

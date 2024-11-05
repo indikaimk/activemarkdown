@@ -18,22 +18,31 @@ module ActiveMarkdown
     }
 
     HTML_MAP = {
-      h1: "<h1>%{content}</h1>"
+      p: "<p>%{content}</p>",
+      h1: "<h1>%{content}</h1>",
+      h2: "<h2>%{content}</h2>",
+      h3: "<h3>%{content}</h3>"
     }
 
     # Render fragment as HTML
     def render 
-      return "" unless self.content
+      return "<p></p>" unless self.content
       return "<p></p>" if self.content == ""
-      
-      if self.element.
 
-        #todo: Initialize this once per app and reuse
-        renderer = Redcarpet::Render::HTML.new(hard_wrap: true)
-        markdown = Redcarpet::Markdown.new(renderer, autolink: true, tables: true)
-
-        return markdown.render self.content
+      if self.element.nil? || self.element.empty?
+        self.element = "p"
       end
+      
+      return HTML_MAP[self.element.to_sym] % {content: content}
+      
+      # if self.element.to_sym == :p
+
+      #   #todo: Initialize this once per app and reuse
+      #   renderer = Redcarpet::Render::HTML.new(hard_wrap: true)
+      #   markdown = Redcarpet::Markdown.new(renderer, autolink: true, tables: true)
+
+      #   return markdown.render self.content
+      # end
 
     end
   end

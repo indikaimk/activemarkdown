@@ -6,8 +6,38 @@ blank:
   position: 1
   meta: MyString
 
-two:
+no_content:
   element: MyString
-  content: MyText
+  # content: nil
+  position: 1
+  meta: MyString
+
+paragraph:
+  element: "p"
+  content: "active markdown"
+  position: 1
+  meta: MyString
+
+h1_header:
+  element: "h1"
+  content: "active markdown"
+  position: 1
+  meta: MyString
+
+h2_header:
+  element: "h2"
+  content: "active markdown"
+  position: 1
+  meta: MyString
+
+h3_header:
+  element: "h3"
+  content: "active markdown"
+  position: 1
+  meta: MyString
+
+no_element:
+  # element: nil
+  content: "active markdown"
   position: 1
   meta: MyString
