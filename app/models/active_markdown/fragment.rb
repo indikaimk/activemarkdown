@@ -17,17 +17,19 @@ module ActiveMarkdown
       "img" => "![%{meta}](%{data})"
     }
 
+    HTML_ATTRIBUTES = 'class="editable-content" data-controller="fragment" data-action="blur->fragment#blur"'
+
     HTML_MAP = {
-      p: "<p>%{content}</p>",
-      h1: "<h1>%{content}</h1>",
-      h2: "<h2>%{content}</h2>",
-      h3: "<h3>%{content}</h3>"
+      p: "<p #{HTML_ATTRIBUTES}>%{content}</p>",
+      h1: '<h1 class="editable-content">%{content}</h1>',
+      h2: '<h2 class="editable-content">%{content}</h2>',
+      h3: '<h3 class="editable-content">%{content}</h3>'
     }
 
     # Render fragment as HTML
     def render 
-      return "<p></p>" unless self.content
-      return "<p></p>" if self.content == ""
+      return "<p #{HTML_ATTRIBUTES}></p>" unless self.content
+      return "<p #{HTML_ATTRIBUTES}></p>" if self.content == ""
 
       if self.element.nil? || self.element.empty?
         self.element = "p"

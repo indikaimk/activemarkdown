@@ -1,7 +1,7 @@
-.fragment-markdown{
+.editable-content{
   display: inline-block;
   min-width: 100px;
-  color: blue;
+  color: #424242;
   border-color: none;
 }
 

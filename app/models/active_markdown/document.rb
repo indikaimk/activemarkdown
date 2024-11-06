@@ -4,7 +4,7 @@ module ActiveMarkdown
     belongs_to :article
 
     after_create do |document|
-      fragment = Fragment.new(content: "Start writing...", position: 1, element: "p")
+      fragment = Fragment.new(content: "", position: 1, element: "p")
       fragment.document = document
       fragment.save
     end

@@ -3,12 +3,12 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = [ "changeMenu" ]
 
-  toggleChangeMenu() {
-    this.changeMenutarget.innerHTML = `test`
-  }
+  // toggleChangeMenu() {
+  //   this.changeMenutarget.innerHTML = `test`
+  // }
 
-  convertTo(){
-
+  blur(){
+    console.log(this.element.textContent)
   }
 
   changeFragmentMenu() {

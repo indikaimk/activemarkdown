@@ -8,58 +8,66 @@ export default class extends Controller {
   }
 
   connect() {
-    let isNew = this.element.parentElement.querySelector(".new-fragment-flag").checked
-    if (isNew == 1) {
-      this.enableEditing()
-
+    // troublishoot why this is triggered multiple times
+    if (this.element.querySelector(".editing-fragment-flag").checked) {
+      let editableContet = this.element.querySelector(".editable-content")
+      editableContet.setAttribute("contenteditable", "true")
+      editableContet.focus()
+      this.moveCursorToEnd(editableContet)
     }
+
   }
   
   saveAndAddFragment(event) {
     event.preventDefault()
+    console.log("enter pressed")
+
+    console.log(this.element.querySelector(".editable-content").textContent)
+
     this.disableEditing()
     this.updateForm()
     let submitButton = this.element.parentElement.querySelector(".enter-key-button")
     this.submitForm(submitButton)
   }
 
-  click(event) {
-    this.enableEditing()
-  }
+  // click(event) {
+  //   this.enableEditing()
+  // }
 
-  mouseDown(event){
-    event.preventDefault();
-    event.stopPropogation();
+  // mouseDown(event){
+  //   event.preventDefault();
+  //   event.stopPropogation();
 
-  }
+  // }
 
 
   blur(event) {
-    this.disableEditing()
-    this.updateForm()
-    this.submitForm()
+    console.log(this.element.querySelector(".editable-content").textContent)
+    // this.disableEditing()
+    // this.updateForm()
+    // this.submitForm()
   }
 
   convertTo(event){
     let activeFragmemt = document.activeElement
-    console.log(activeFragmemt)
-    activeFragmemt.parentElement.querySelector(".fragment-element").value = this.convertTypeValue
+    // console.log(activeFragmemt)
+    activeFragmemt.parentElement.parentElement.querySelector(".fragment-element").value = this.convertTypeValue
     // activeFragmemt.parentElement.querySelector(".fragment-content").value = this.getMarkdown()
     // activeFragmemt.parentElement.querySelector("form").requestSubmit()
   }
 
   enableEditing() {
-    let editableComponent = this.element //.querySelector("p")
+    let editableComponent = this.element.querySelector(".editable-content")
     editableComponent.setAttribute("contenteditable", "true")
     editableComponent.focus()  
   }
 
   disableEditing() {
-    this.element.removeAttribute("contenteditable")
+    this.element.querySelector(".editable-content").removeAttribute("contenteditable")
   }
 
   updateForm(){
-    this.element.parentElement.querySelector(".fragment-content").value = this.getMarkdown()
+    this.element.parentElement.querySelector(".fragment-content").value = this.element.querySelector(".editable-content").textContent
   }
 
   getMarkdown(){
@@ -74,4 +82,13 @@ export default class extends Controller {
       this.element.parentElement.querySelector("form").requestSubmit()
     }
   }
+
+  moveCursorToEnd(editableContet) {
+    const range = document.createRange();
+    const selection = window.getSelection();
+    range.setStart(editableContet, editableContet.childNodes.length);
+    range.collapse(true);
+    selection.removeAllRanges();
+    selection.addRange(range);
+  };
 }
