@@ -8,12 +8,13 @@ module ActiveMarkdown
     
     def create 
       @document = Document.find(params[:document_id])
-      proceeding_fragment = Fragment.find(fragment_params[:proceeding_fragment_id])
-      @fragment = @document.add_new_fragment(proceeding_fragment.position, fragment_params[:content])
+      @proceeding_fragment = Fragment.find(fragment_params[:proceeding_fragment_id])
+      @fragment = @document.add_new_fragment(@proceeding_fragment.position, fragment_params[:content])
       
       if @fragment
         respond_to do |format|
-          format.html redirect_to edit_document_path(@document)
+          # format.html {redirect_to main_app.edit_article_path(@fragment.document.article)}
+          format.turbo_stream
         end
       end
 

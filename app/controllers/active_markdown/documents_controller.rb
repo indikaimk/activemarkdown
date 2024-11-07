@@ -3,7 +3,7 @@ module ActiveMarkdown
     before_action :set_document, only: [:edit]
 
     def edit 
-      @fragment = Fragment.new
+      # @fragment = Fragment.new
     end
 
     def update 

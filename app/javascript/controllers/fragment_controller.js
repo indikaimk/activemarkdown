@@ -14,6 +14,9 @@ export default class extends Controller {
     console.log("Blurred")
     console.log(event)
     console.log(this.element.textContent)
+    this.element.parentElement.querySelector(".fragment-content").value = this.element.textContent;
+    this.element.parentElement.querySelector(".editing-fragment-flag").value = false;
+    this.element.parentElement.querySelector("form").requestSubmit()
   }
 
   focus(){

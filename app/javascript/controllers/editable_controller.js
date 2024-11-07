@@ -36,10 +36,12 @@ export default class extends Controller {
     // this.element.parentElement.parentElement.appendChild(newElement)
 
     let newFragmentForm = document.getElementById('new-fragment-form');
+    // let newFragmentForm = this.element.querySelector('.new-fragment-form')
     newFragmentForm.querySelector('.new-fragment-content').value = ""; //todo: with correct text if entered in middle of the text
     newFragmentForm.querySelector('.proceeding-fragment-id').value = this.element.querySelector('.fragment-id').value;
-    newFragmentForm.submit();
-    this.disableEditing();
+    let submitButton = newFragmentForm.querySelector('.enter-key-button')
+    newFragmentForm.requestSubmit(submitButton);
+    // this.disableEditing();
 
     // this.element.querySelector(".fragment-content").value = this.element.querySelector(".editable-content").textContent;
     // this.element.querySelector(".editing-fragment-flag").value = false;
