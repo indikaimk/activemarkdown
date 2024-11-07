@@ -4,6 +4,12 @@ module ActiveMarkdown
   class Fragment < ApplicationRecord
     belongs_to :document
 
+    after_initialize :set_default_values
+
+    # This is used to override the value of `editing` parameter that's set to false in a blur event.
+    # If `editing_override` is set to true, set editing parameter to true again.
+    attr_accessor :editing_override, :proceeding_fragment_id
+
     scope :by_position, -> { order(position: :asc) }
 
     MD_MAP = {
@@ -18,6 +24,7 @@ module ActiveMarkdown
     }
 
     HTML_ATTRIBUTES = 'class="editable-content" data-controller="fragment" data-action="blur->fragment#blur"'
+    # HTML_ATTRIBUTES = 'class="editable-content"'
 
     HTML_MAP = {
       p: "<p #{HTML_ATTRIBUTES}>%{content}</p>",
@@ -46,6 +53,10 @@ module ActiveMarkdown
       #   return markdown.render self.content
       # end
 
+    end
+
+    def set_default_values
+      editing_override = false
     end
   end
 end

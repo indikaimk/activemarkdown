@@ -10,10 +10,11 @@ module ActiveMarkdown
     end
 
 
-    def add_new_fragment(previous_fragment_postion)
-      new_fragment =  Fragment.new(position: previous_fragment_postion + 1, content: "")
+    def add_new_fragment(previous_fragment_postion, content: "")
+      new_fragment =  Fragment.new(position: previous_fragment_postion + 1, content: content)
       push_back_fragments_below(previous_fragment_postion)
       self.fragments << new_fragment
+      return new_fragment
     end
 
     def push_back_fragments_below(fragment_position) 

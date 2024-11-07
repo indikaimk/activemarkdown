@@ -2,16 +2,18 @@
 
   <div  data-controller="editable" 
         data-action="click->editable#click 
-                    blur->editable#blur 
                     keydown.enter->editable#saveAndAddFragment" 
         data-editable-element="<%= fragment.element %>">
     
     <%= form_with(model: fragment, url: active_markdown.fragment_path(fragment), method: "patch") do |form| %>
+      <%= form.text_field :id, hidden: true, class: "fragment-id" %>
       <%= form.text_field :position, hidden: true, class: "fragment-position" %>
       <%= form.text_field :element, hidden: true, class: "fragment-element" %>
+          <!-- data: {controller: "fragment", action: "focus->fragment#focus"} %> -->
       <%= form.text_area :content, hidden: true, class: "fragment-content" %>
       <%= form.check_box :is_new, checked: fragment.is_new?, hidden: true, class: "new-fragment-flag" %>
-      <%= form.check_box :editing, checked: fragment.is_new?, hidden: true, class: "editing-fragment-flag" %>
+      <%= form.check_box :editing, checked: fragment.editing?, hidden: true, class: "editing-fragment-flag" %>
+      <%= form.check_box :editing_override, checked: fragment.editing_override, hidden: true, class: "editing-override-fragment-flag" %>
       <%= form.submit "enter-key", hidden: true, class: "enter-key-button" %>
     <% end %>   
 
@@ -28,3 +30,11 @@
     
   </div>
 <% end %>
+
+<turbo-stream action="replace" target="message_1">
+  <template>
+    <div id="message_1">
+      This div will replace the existing element with the DOM ID "message_1".
+    </div>
+  </template>
+</turbo-stream>

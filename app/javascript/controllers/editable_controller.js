@@ -9,6 +9,10 @@ export default class extends Controller {
 
   connect() {
     // troublishoot why this is triggered multiple times
+    console.log("connecting")
+    // setTimeout(() => {
+    //   console.log("After timeout")
+    // }, 500)
     if (this.element.querySelector(".editing-fragment-flag").checked) {
       let editableContet = this.element.querySelector(".editable-content")
       editableContet.setAttribute("contenteditable", "true")
@@ -19,47 +23,65 @@ export default class extends Controller {
   }
   
   saveAndAddFragment(event) {
-    event.preventDefault()
-    console.log("enter pressed")
+    event.preventDefault();
+    console.log("enter pressed");
 
-    console.log(this.element.querySelector(".editable-content").textContent)
+    console.log(this.element.querySelector(".editable-content").textContent);
+    // let newElement = document.createElement('form');
+    // newElement.setAttribute("id", "message_1");
+    // newElement.textContent = 'This is the new element.';
+    // newElement.innerHTML = 'This is the new element.';
+    // this.element.after(newElement)
+    // this.element.parentElement.parentElement.insertBefore(newElement, this.element.parentElement.nextSibling);
+    // this.element.parentElement.parentElement.appendChild(newElement)
 
-    this.disableEditing()
-    this.updateForm()
-    let submitButton = this.element.parentElement.querySelector(".enter-key-button")
-    this.submitForm(submitButton)
+    let newFragmentForm = document.getElementById('new-fragment-form');
+    newFragmentForm.querySelector('.new-fragment-content').value = ""; //todo: with correct text if entered in middle of the text
+    newFragmentForm.querySelector('.proceeding-fragment-id').value = this.element.querySelector('.fragment-id').value;
+    newFragmentForm.submit();
+    this.disableEditing();
+
+    // this.element.querySelector(".fragment-content").value = this.element.querySelector(".editable-content").textContent;
+    // this.element.querySelector(".editing-fragment-flag").value = false;
+    
+    // let submitButton = this.element.parentElement.querySelector(".enter-key-button");
+    // this.submitForm(submitButton);
   }
 
-  // click(event) {
-  //   this.enableEditing()
-  // }
-
-  // mouseDown(event){
-  //   event.preventDefault();
-  //   event.stopPropogation();
-
-  // }
-
-
-  blur(event) {
-    console.log(this.element.querySelector(".editable-content").textContent)
-    // this.disableEditing()
-    // this.updateForm()
-    // this.submitForm()
+  click(event) {
+    this.enableEditing()
   }
+
+  mouseDown(event){
+    event.preventDefault();
+    // event.stopPropogation();
+
+  }
+
+
+  // blur(event) {
+
+  //   console.log("blur from editable")
+  //   // this.disableEditing()
+  //   // this.updateForm()
+  //   // this.submitForm()
+  // }
 
   convertTo(event){
+    event.preventDefault()
     let activeFragmemt = document.activeElement
-    // console.log(activeFragmemt)
-    activeFragmemt.parentElement.parentElement.querySelector(".fragment-element").value = this.convertTypeValue
+    console.log("converting")
+    console.log(activeFragmemt)
+    activeFragmemt.parentElement.querySelector(".fragment-content").value = activeFragmemt.textContent
+    activeFragmemt.parentElement.querySelector(".fragment-element").value = this.convertTypeValue
     // activeFragmemt.parentElement.querySelector(".fragment-content").value = this.getMarkdown()
-    // activeFragmemt.parentElement.querySelector("form").requestSubmit()
+    activeFragmemt.parentElement.querySelector("form").requestSubmit()
   }
 
-  enableEditing() {
-    let editableComponent = this.element.querySelector(".editable-content")
-    editableComponent.setAttribute("contenteditable", "true")
-    editableComponent.focus()  
+  enableEditing() { 
+    let editableContet = this.element.querySelector(".editable-content")
+    editableContet.setAttribute("contenteditable", "true")
+    editableContet.focus()
   }
 
   disableEditing() {
