@@ -21,20 +21,24 @@ module ActiveMarkdown
     end
 
     def update 
-      new_fragment_params = fragment_params
-      # new_fragment_params[:is_new] = false
-      @fragment.update(new_fragment_params)
-      # @document = @fragment.document
-
       # If user press enter key, insert new fragment below
       # if params[:commit] == "enter-key"
       #   @document.add_new_fragment(@fragment.position)
       # # else
       #   redirect_to edit_fragment_path(@fragment)
       # end
+
+      @fragment.assign_attributes(fragment_params)
+
+      if params[:commit] == "blurred"
+        @fragment.editing = false
+      end
+      if @fragment.save
+        flash[:notice] = "Saved"
+      else
+        flash[:alert] = "Could not save"
+      end
       redirect_to edit_fragment_path(@fragment)
-
-
       # redirect_to main_app.edit_article_path(@fragment.document)
     end
     

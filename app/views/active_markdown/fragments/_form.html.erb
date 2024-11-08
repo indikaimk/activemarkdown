@@ -11,9 +11,10 @@
       <%= form.text_field :element, hidden: true, class: "fragment-element" %>
       <%= form.text_area :content, hidden: true, class: "fragment-content" %>
       <%= form.check_box :is_new, checked: fragment.is_new?, hidden: true, class: "new-fragment-flag" %>
-      <%= form.check_box :editing, checked: fragment.editing?, class: "editing-fragment-flag" %>
-      <%= form.check_box :editing_override, checked: fragment.editing_override, hidden: true, class: "editing-override-fragment-flag" %>
+      <%= form.check_box :editing, checked: fragment.editing?, hidden: true, class: "editing-fragment-flag" %>
+      <%= form.check_box :editing_override, checked: fragment.editing_override, class: "editing-override-fragment-flag" %>
       <%= form.submit "enter-key", hidden: true, class: "enter-key-button" %>
+      <%= form.submit "blurred", hidden: true, class: "blurred-button" %>
     <% end %>   
 
     <!-- <a href="" data-controller="fragment" data-action="fragment#toggleChangeMenu" class="fragment-menu-button">

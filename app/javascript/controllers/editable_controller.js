@@ -76,6 +76,8 @@ export default class extends Controller {
     activeFragmemt.parentElement.querySelector(".fragment-content").value = activeFragmemt.textContent;
     activeFragmemt.parentElement.querySelector(".fragment-element").value = this.convertTypeValue;
     activeFragmemt.parentElement.querySelector(".editing-fragment-flag").checked = true;
+    activeFragmemt.parentElement.querySelector(".editing-override-fragment-flag").checked = true;
+
     // activeFragmemt.parentElement.querySelector(".fragment-content").value = this.getMarkdown()
     activeFragmemt.parentElement.querySelector("form").requestSubmit();
   }
