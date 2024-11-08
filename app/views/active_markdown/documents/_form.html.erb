@@ -37,8 +37,8 @@
   
   <%= turbo_frame_tag "new_fragment" do %>
     <%= form_with(model: [document, ActiveMarkdown::Fragment.new], url: active_markdown.document_fragments_path(document), method: "post", id: "new-fragment-form") do |form| %>
-      <%= form.text_area :content, class: "new-fragment-content" %>
-      <%= form.text_field :proceeding_fragment_id, class: "proceeding-fragment-id" %>
+      <%= form.text_area :content, hidden: true, class: "new-fragment-content" %>
+      <%= form.text_field :proceeding_fragment_id, hidden: true, class: "proceeding-fragment-id" %>
 
       <%= form.submit "enter-key", hidden: true, class: "enter-key-button" %>
     <% end %>

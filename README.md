@@ -1,8 +1,6 @@
-# ActiveMarkdown
-Short description and motivation.
+# Active Markdown
+Active Markdown is a visual Markdown editor for Rails. Active Markdown is still experimental. This is a [demo Rails application](https://github.com/indikaimk/activemarkdown_blog) that uses Active Markdown.
 
-## Usage
-How to use my plugin.
 
 ## Installation
 Add this line to your application's Gemfile:
@@ -24,6 +22,11 @@ $ gem install active_markdown
 Install `turndown`, the JavaScript library for converting HTML to Markdown.
 ```bash
 $ ./bin/importmap pin turndown
+```
+
+Install `rangy`, the JavaScript library for selecting text ranges
+```bash
+$ ./bin/importmap pin rangy
 ```
 
 Install tippy.

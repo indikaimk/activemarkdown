@@ -23,14 +23,17 @@ module ActiveMarkdown
       "img" => "![%{meta}](%{data})"
     }
 
-    HTML_ATTRIBUTES = 'class="editable-content" data-controller="fragment" data-action="blur->fragment#blur"'
+    HTML_ATTRIBUTES = 'class="editable-content" data-controller="fragment" data-action="blur->fragment#blur mouseDown->editable#mouseDown mouseUp->editable#mouseUp"'
+    
+    
+    
     # HTML_ATTRIBUTES = 'class="editable-content"'
 
     HTML_MAP = {
       p: "<p #{HTML_ATTRIBUTES}>%{content}</p>",
-      h1: '<h1 class="editable-content">%{content}</h1>',
-      h2: '<h2 class="editable-content">%{content}</h2>',
-      h3: '<h3 class="editable-content">%{content}</h3>'
+      h1: "<h1 #{HTML_ATTRIBUTES}>%{content}</h1>",
+      h2: "<h2 #{HTML_ATTRIBUTES}>%{content}</h2>",
+      h3: "<h3 #{HTML_ATTRIBUTES}>%{content}</h3>"
     }
 
     # Render fragment as HTML

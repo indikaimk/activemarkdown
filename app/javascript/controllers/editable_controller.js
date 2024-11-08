@@ -14,6 +14,7 @@ export default class extends Controller {
     //   console.log("After timeout")
     // }, 500)
     if (this.element.querySelector(".editing-fragment-flag").checked) {
+
       let editableContet = this.element.querySelector(".editable-content")
       editableContet.setAttribute("contenteditable", "true")
       editableContet.focus()
@@ -56,8 +57,6 @@ export default class extends Controller {
 
   mouseDown(event){
     event.preventDefault();
-    // event.stopPropogation();
-
   }
 
 
@@ -70,14 +69,15 @@ export default class extends Controller {
   // }
 
   convertTo(event){
-    event.preventDefault()
-    let activeFragmemt = document.activeElement
-    console.log("converting")
-    console.log(activeFragmemt)
-    activeFragmemt.parentElement.querySelector(".fragment-content").value = activeFragmemt.textContent
-    activeFragmemt.parentElement.querySelector(".fragment-element").value = this.convertTypeValue
+    event.preventDefault();
+    let activeFragmemt = document.activeElement;
+    // console.log("converting")
+    console.log(activeFragmemt);
+    activeFragmemt.parentElement.querySelector(".fragment-content").value = activeFragmemt.textContent;
+    activeFragmemt.parentElement.querySelector(".fragment-element").value = this.convertTypeValue;
+    activeFragmemt.parentElement.querySelector(".editing-fragment-flag").checked = true;
     // activeFragmemt.parentElement.querySelector(".fragment-content").value = this.getMarkdown()
-    activeFragmemt.parentElement.querySelector("form").requestSubmit()
+    activeFragmemt.parentElement.querySelector("form").requestSubmit();
   }
 
   enableEditing() { 
