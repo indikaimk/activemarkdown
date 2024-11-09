@@ -19,15 +19,6 @@ Or install it yourself as:
 $ gem install active_markdown
 ```
 
-Install `turndown`, the JavaScript library for converting HTML to Markdown.
-```bash
-$ ./bin/importmap pin turndown
-```
-
-Install `rangy`, the JavaScript library for selecting text ranges
-```bash
-$ ./bin/importmap pin rangy
-```
 
 Install tippy.
 ```bash

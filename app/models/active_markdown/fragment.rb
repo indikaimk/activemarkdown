@@ -8,7 +8,10 @@ module ActiveMarkdown
 
     # This is used to override the value of `editing` parameter that's set to false in a blur event.
     # If `editing_override` is set to true, set editing parameter to true again.
-    attr_accessor :editing_override, :proceeding_fragment_id
+    # `format`: Set the format parameter to apply an inline style to a part of the content of a 
+    # fragment. Supported inline styles are `strong`, `em`, `del`, and `code`. Also set the `caret_start`
+    # and `caret_end` values to apply the inline format.
+    attr_accessor :editing_override, :proceeding_fragment_id, :format, :caret_start, :caret_end
 
     scope :by_position, -> { order(position: :asc) }
 
@@ -23,7 +26,8 @@ module ActiveMarkdown
       "img" => "![%{meta}](%{data})"
     }
 
-    HTML_ATTRIBUTES = 'class="editable-content" data-controller="fragment" data-action="blur->fragment#blur mouseDown->editable#mouseDown mouseUp->editable#mouseUp"'
+    HTML_ATTRIBUTES = 'class="editable-content" data-controller="fragment" data-action="blur->fragment#blur mousedown->fragment#mouseDown mouseu
+    p->fragment#mouseUp"'
     
     
     
@@ -58,8 +62,21 @@ module ActiveMarkdown
 
     end
 
+    def apply_inline_formats
+      puts "-----"
+
+      if self.format == "strong"
+        self.content = self.content.insert(self.caret_start.to_i, '<strong>')
+        self.content = self.content.insert(self.caret_end.to_i, '</strong>')
+      end
+      self.format = ""
+    end
+
     def set_default_values
-      editing_override = false
+      self.editing_override = false
+      self.format = ""
+      self.caret_start = 0
+      self.caret_end = 0
     end
   end
 end

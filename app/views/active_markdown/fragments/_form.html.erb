@@ -9,12 +9,18 @@
       <%= form.text_field :id, hidden: true, class: "fragment-id" %>
       <%= form.text_field :position, hidden: true, class: "fragment-position" %>
       <%= form.text_field :element, hidden: true, class: "fragment-element" %>
-      <%= form.text_area :content, hidden: true, class: "fragment-content" %>
+      <%= form.text_field :format, hidden: true, class: "fragment-inline-format" %>
+      <%= form.text_field :caret_start, hidden: true, class: "caret-start" %>
+      <%= form.text_field :caret_end, hidden: true, class: "caret-end" %>
+      <%= form.text_area :content, class: "fragment-content" %>
       <%= form.check_box :is_new, checked: fragment.is_new?, hidden: true, class: "new-fragment-flag" %>
       <%= form.check_box :editing, checked: fragment.editing?, hidden: true, class: "editing-fragment-flag" %>
       <%= form.check_box :editing_override, checked: fragment.editing_override, hidden: true, class: "editing-override-fragment-flag" %>
       <%= form.submit "enter-key", hidden: true, class: "enter-key-button" %>
       <%= form.submit "blurred", hidden: true, class: "blurred-button" %>
+
+      <%= form.submit "bold", hidden: true, class: "bold-button" %>
+
     <% end %>   
 
     <!-- <a href="" data-controller="fragment" data-action="fragment#toggleChangeMenu" class="fragment-menu-button">

@@ -1,4 +1,4 @@
-import {turndownService} from "../lib/turndown_service"
+// import {turndownService} from "../lib/turndown_service"
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
@@ -25,9 +25,9 @@ export default class extends Controller {
   
   saveAndAddFragment(event) {
     event.preventDefault();
-    console.log("enter pressed");
+    // console.log("enter pressed");
 
-    console.log(this.element.querySelector(".editable-content").textContent);
+    // console.log(this.element.querySelector(".editable-content").textContent);
     // let newElement = document.createElement('form');
     // newElement.setAttribute("id", "message_1");
     // newElement.textContent = 'This is the new element.';
@@ -70,9 +70,10 @@ export default class extends Controller {
 
   convertTo(event){
     event.preventDefault();
+    // event.stopPropagation();
     let activeFragmemt = document.activeElement;
     // console.log("converting")
-    console.log(activeFragmemt);
+    // console.log(activeFragmemt);
     activeFragmemt.parentElement.querySelector(".fragment-content").value = activeFragmemt.textContent;
     activeFragmemt.parentElement.querySelector(".fragment-element").value = this.convertTypeValue;
     activeFragmemt.parentElement.querySelector(".editing-fragment-flag").checked = true;

@@ -30,15 +30,19 @@ module ActiveMarkdown
 
       @fragment.assign_attributes(fragment_params)
 
+      @fragment.apply_inline_formats()
+
       if params[:commit] == "blurred"
         @fragment.editing = false
       end
+
       if @fragment.save
         flash[:notice] = "Saved"
       else
         flash[:alert] = "Could not save"
       end
-      redirect_to edit_fragment_path(@fragment)
+      render :edit
+      # redirect_to edit_fragment_path(@fragment)
       # redirect_to main_app.edit_article_path(@fragment.document)
     end
     
@@ -49,7 +53,8 @@ module ActiveMarkdown
       end
 
       def fragment_params 
-        params.require(:fragment).permit(:position, :content, :is_new, :element, :editing, :proceeding_fragment_id)
+        params.require(:fragment).permit(:position, :content, :is_new, :element, :editing, 
+                :proceeding_fragment_id, :format, :caret_start, :caret_end)
       end
   end
 end

@@ -26,20 +26,25 @@ export default class extends Controller {
 
   mouseDown(event){
     console.log("mouse down")
-    rangy.getSelection().removeAllRanges();
+    // rangy.getSelection().removeAllRanges();
+
   }
 
 
   mouseUp(event){
-    // get the current selection from window
-    let selection = rangy.getSelection()
-
-    // we can return early when the selection is collapsed
-    if (selection.isCollapsed) { return }
-
-    // Trim whitespace from the selection
-    selection.trim()
+    console.log("mouse up")
+    const selection = window.getSelection();
+    // let activeFragmemt = document.activeElement;
     console.log(selection)
+    // // get the current selection from window
+    // let selection = rangy.getSelection()
+
+    // // we can return early when the selection is collapsed
+    // if (selection.isCollapsed) { return }
+
+    // // Trim whitespace from the selection
+    // selection.trim()
+    // console.log(selection)
 
     // show format selection menu
     // show_format_selection_menu(this.element)
