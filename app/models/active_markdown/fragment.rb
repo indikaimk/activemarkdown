@@ -11,7 +11,12 @@ module ActiveMarkdown
     # `format`: Set the format parameter to apply an inline style to a part of the content of a 
     # fragment. Supported inline styles are `strong`, `em`, `del`, and `code`. Also set the `caret_start`
     # and `caret_end` values to apply the inline format.
-    attr_accessor :editing_override, :proceeding_fragment_id, :format, :caret_start, :caret_end
+    attr_accessor :editing_override, :proceeding_fragment_id, :format
+
+    # Selection start position for applying inline format changes.
+    attribute :caret_start, :integer
+    # Selection end position for applying inline format changes.
+    attribute :caret_end, :integer
 
     scope :by_position, -> { order(position: :asc) }
 
@@ -63,13 +68,15 @@ module ActiveMarkdown
     end
 
     def apply_inline_formats
-      puts "-----"
+      
+      if self.format == "strong" && self.caret_start <= self.content.length && self.caret_end <= self.content.length
+        self.content = self.content.insert(self.caret_start, '<strong>')
+        self.content = self.content.insert(self.caret_end + 8, '</strong>')
 
-      if self.format == "strong"
-        self.content = self.content.insert(self.caret_start.to_i, '<strong>')
-        self.content = self.content.insert(self.caret_end.to_i, '</strong>')
       end
       self.format = ""
+      self.caret_start = 0
+      self.caret_end = 0
     end
 
     def set_default_values

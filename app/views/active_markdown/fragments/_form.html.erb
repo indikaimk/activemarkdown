@@ -12,7 +12,7 @@
       <%= form.text_field :format, hidden: true, class: "fragment-inline-format" %>
       <%= form.text_field :caret_start, hidden: true, class: "caret-start" %>
       <%= form.text_field :caret_end, hidden: true, class: "caret-end" %>
-      <%= form.text_area :content, class: "fragment-content" %>
+      <%= form.text_area :content, hidden: true, class: "fragment-content" %>
       <%= form.check_box :is_new, checked: fragment.is_new?, hidden: true, class: "new-fragment-flag" %>
       <%= form.check_box :editing, checked: fragment.editing?, hidden: true, class: "editing-fragment-flag" %>
       <%= form.check_box :editing_override, checked: fragment.editing_override, hidden: true, class: "editing-override-fragment-flag" %>

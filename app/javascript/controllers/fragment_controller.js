@@ -16,7 +16,7 @@ export default class extends Controller {
     // console.log(this.element.textContent)
     // this.element.querySelector(".editable-content").removeAttribute("contenteditable")
     if (this.element.parentElement.querySelector(".editing-override-fragment-flag").checked == false) {
-      this.element.parentElement.querySelector(".fragment-content").value = this.element.textContent;
+      this.element.parentElement.querySelector(".fragment-content").value = this.element.innerHTML;
       // this.element.parentElement.querySelector(".editing-fragment-flag").checked = false;
       let submitButton = this.element.parentElement.querySelector('.blurred-button')
       this.element.parentElement.querySelector("form").requestSubmit(submitButton);

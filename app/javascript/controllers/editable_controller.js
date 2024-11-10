@@ -31,7 +31,6 @@ export default class extends Controller {
     // let newElement = document.createElement('form');
     // newElement.setAttribute("id", "message_1");
     // newElement.textContent = 'This is the new element.';
-    // newElement.innerHTML = 'This is the new element.';
     // this.element.after(newElement)
     // this.element.parentElement.parentElement.insertBefore(newElement, this.element.parentElement.nextSibling);
     // this.element.parentElement.parentElement.appendChild(newElement)
@@ -74,7 +73,7 @@ export default class extends Controller {
     let activeFragmemt = document.activeElement;
     // console.log("converting")
     // console.log(activeFragmemt);
-    activeFragmemt.parentElement.querySelector(".fragment-content").value = activeFragmemt.textContent;
+    activeFragmemt.parentElement.querySelector(".fragment-content").value = activeFragmemt.innerHTML;
     activeFragmemt.parentElement.querySelector(".fragment-element").value = this.convertTypeValue;
     activeFragmemt.parentElement.querySelector(".editing-fragment-flag").checked = true;
     activeFragmemt.parentElement.querySelector(".editing-override-fragment-flag").checked = true;
@@ -94,7 +93,7 @@ export default class extends Controller {
   }
 
   updateForm(){
-    this.element.parentElement.querySelector(".fragment-content").value = this.element.querySelector(".editable-content").textContent
+    this.element.parentElement.querySelector(".fragment-content").value = this.element.querySelector(".editable-content").innerHTML;
   }
 
   getMarkdown(){

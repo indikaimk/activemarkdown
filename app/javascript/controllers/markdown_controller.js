@@ -15,13 +15,18 @@ export default class extends Controller {
 
   formatSelection(event){
     event.preventDefault();
-    let activeFragmemt = document.activeElement;
-    activeFragmemt.parentElement.querySelector(".fragment-content").value = activeFragmemt.textContent;
-    activeFragmemt.parentElement.querySelector(".fragment-inline-format").value = this.formatTypeValue;
-    activeFragmemt.parentElement.querySelector(".caret-start").value = 5 //get the cursor start
-    activeFragmemt.parentElement.querySelector(".caret-end").value = 10
-    activeFragmemt.parentElement.querySelector(".editing-fragment-flag").checked = true;
-    activeFragmemt.parentElement.querySelector(".editing-override-fragment-flag").checked = true;
+
+    let selection = document.getSelection();
+    // console.log(selection);
+
+    let activeFragmemt = selection.focusNode.parentElement.parentElement;
+    console.log(selection.focusNode.parentElement.innerHTML)
+    activeFragmemt.querySelector(".fragment-content").value = selection.focusNode.parentElement.innerHTML;
+    activeFragmemt.querySelector(".fragment-inline-format").value = this.formatTypeValue;
+    activeFragmemt.querySelector(".caret-start").value = selection.anchorOffset; //get the cursor start
+    activeFragmemt.querySelector(".caret-end").value = selection.focusOffset;
+    activeFragmemt.querySelector(".editing-fragment-flag").checked = true;
+    activeFragmemt.querySelector(".editing-override-fragment-flag").checked = true;
 
     activeFragmemt.parentElement.querySelector("form").requestSubmit();
 
