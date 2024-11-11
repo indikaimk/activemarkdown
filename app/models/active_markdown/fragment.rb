@@ -68,15 +68,28 @@ module ActiveMarkdown
     end
 
     def apply_inline_formats
-      
-      if self.format == "strong" && self.caret_start <= self.content.length && self.caret_end <= self.content.length
-        self.content = self.content.insert(self.caret_start, '<strong>')
-        self.content = self.content.insert(self.caret_end + 8, '</strong>')
+      #Apply formatting on if `format` is set.
+      if not self.format.empty?
+        # Search for a tag with class `selected`.
+        doc = Nokogiri::HTML(self.content)
+        selected_node = doc.at(".selected")
 
+        # If a tag with class `selected` exists in the document, remove it.
+        # @todo: if
+        if selected_node
+          selected_node.replace(selected_node.text)
+          self.content = doc.at("p").inner_html
+          # puts self.content
+        else
+          if self.caret_start <= self.content.length && self.caret_end <= self.content.length
+            self.content = self.content.insert(self.caret_start, "<#{self.format}>")
+            self.content = self.content.insert(self.caret_end + self.format.length + 2, "</#{self.format}>")
+          end
+        end
       end
       self.format = ""
       self.caret_start = 0
-      self.caret_end = 0
+      # self.caret_end = 0
     end
 
     def set_default_values

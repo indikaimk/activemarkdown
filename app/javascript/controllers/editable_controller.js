@@ -2,7 +2,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static classes = ["selected"]
+  // static classes = ["selected"]
   static values = {
     convertType: String
   }
