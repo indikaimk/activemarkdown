@@ -50,6 +50,10 @@ export default class extends Controller {
     // this.submitForm(submitButton);
   }
 
+  deleteFragment(){
+    console.log("backspace pressed")
+  }
+
   click(event) {
     this.enableEditing()
   }

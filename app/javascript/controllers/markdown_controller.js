@@ -54,7 +54,17 @@ export default class extends Controller {
     // console.log("findFragmentElement ends...")
 
     return null
+  }
 
+  formatSelectionLocal(event){
+    console.log("formatSelectionLocal starts...");
+    event.preventDefault();
+
+    let selection = document.getSelection();
+    console.log(selection.focusNode)
+    let t = document.createElement(this.formatTypeValue)
+    t.textContent = selection.focusNode.textContent
+    selection.focusNode.replaceWith(t)
   }
 
 }

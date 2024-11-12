@@ -2,7 +2,8 @@
 
   <div  data-controller="editable" 
         data-action="click->editable#click 
-                    keydown.enter->editable#saveAndAddFragment"
+                    keydown.enter->editable#saveAndAddFragment
+                    keydown.backspace->editable#deleteFragment"
         data-editable-element="<%= fragment.element %>">
     
     <%= form_with(model: fragment, url: active_markdown.fragment_path(fragment), method: "patch") do |form| %>
@@ -28,6 +29,7 @@
         drag_indicator
       </span>
     </a> -->
+
 
 
     <%= raw fragment.render %>  

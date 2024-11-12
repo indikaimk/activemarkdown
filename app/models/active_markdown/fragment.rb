@@ -78,10 +78,11 @@ module ActiveMarkdown
         # @todo: if
         if selected_node
           selected_node.replace(selected_node.text)
-          self.content = doc.at("p").inner_html
+          self.content = doc.at(".editable-content").inner_html
           # puts self.content
         else
-          if self.caret_start <= self.content.length && self.caret_end <= self.content.length
+          #
+          if self.caret_start <= self.content.length && self.caret_end <= self.content.length && self.caret_end > self.caret_start
             self.content = self.content.insert(self.caret_start, "<#{self.format}>")
             self.content = self.content.insert(self.caret_end + self.format.length + 2, "</#{self.format}>")
           end
