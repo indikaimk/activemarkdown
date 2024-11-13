@@ -50,8 +50,12 @@ export default class extends Controller {
     // this.submitForm(submitButton);
   }
 
-  deleteFragment(){
-    console.log("backspace pressed")
+  keyDownEvent(event){
+    if (event.keyCode == 8 || event.keyCode == 46) {
+      if (this.element.querySelector(".editable-content").innerHTML === "") {
+        this.deleteFragment(this.element)
+      }
+    }
   }
 
   click(event) {
@@ -70,6 +74,10 @@ export default class extends Controller {
   //   // this.updateForm()
   //   // this.submitForm()
   // }
+
+  deleteFragment(element){
+    this.element.querySelector('.delete-fragment-button').click()
+  }
 
   convertTo(event){
     event.preventDefault();

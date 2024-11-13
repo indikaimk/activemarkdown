@@ -1,6 +1,6 @@
 module ActiveMarkdown
   class FragmentsController < ApplicationController
-    before_action :set_fragment, only: [:update, :edit]
+    before_action :set_fragment, only: [:edit]
 
     def edit 
       
@@ -27,23 +27,35 @@ module ActiveMarkdown
       # # else
       #   redirect_to edit_fragment_path(@fragment)
       # end
+      Rails.error.handle do
+        @fragment = Fragment.find(params[:id])
+        @fragment.assign_attributes(fragment_params)
 
-      @fragment.assign_attributes(fragment_params)
+        @fragment.apply_inline_formats()
 
-      @fragment.apply_inline_formats()
+        if params[:commit] == "blurred"
+          @fragment.editing = false
+        end
 
-      if params[:commit] == "blurred"
-        @fragment.editing = false
+        if @fragment.save
+          flash[:notice] = "Saved"
+        else
+          flash[:alert] = "Could not save"
+        end
+        render :edit
       end
-
-      if @fragment.save
-        flash[:notice] = "Saved"
-      else
-        flash[:alert] = "Could not save"
-      end
-      render :edit
       # redirect_to edit_fragment_path(@fragment)
       # redirect_to main_app.edit_article_path(@fragment.document)
+    end
+
+    def destroy 
+      @fragment = Fragment.find(params[:id])
+      document = @fragment.document
+      if document.remove_fragment(@fragment)
+        respond_to do |format|
+          format.turbo_stream
+        end
+      end
     end
     
 

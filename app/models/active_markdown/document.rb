@@ -17,6 +17,18 @@ module ActiveMarkdown
       return new_fragment
     end
 
+    def remove_fragment(fragment)
+      fragment_deleted = Rails.error.handle do
+        fragment_position = fragment.position
+        if fragment.destroy
+          pull_up_fragments_below(fragment_position + 1)
+          return true
+        else
+          return false
+        end
+      end
+    end
+
     def push_back_fragments_below(fragment_position) 
       fragments = self.fragments.where('position > ?', fragment_position)
       if fragments
@@ -25,6 +37,16 @@ module ActiveMarkdown
           fragment.save
         end
       end
+    end
+
+    def pull_up_fragments_below(fragment_position) 
+      fragments = self.fragments.where('position > ?', fragment_position)
+      if fragments
+        fragments.each do |fragment| 
+          fragment.position -= 1
+          fragment.save
+        end
+      end      
     end
   end
 end

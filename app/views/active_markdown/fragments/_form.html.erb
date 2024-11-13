@@ -3,7 +3,7 @@
   <div  data-controller="editable" 
         data-action="click->editable#click 
                     keydown.enter->editable#saveAndAddFragment
-                    keydown.backspace->editable#deleteFragment"
+                    keydown->editable#keyDownEvent"
         data-editable-element="<%= fragment.element %>">
     
     <%= form_with(model: fragment, url: active_markdown.fragment_path(fragment), method: "patch") do |form| %>
@@ -23,6 +23,7 @@
       <%= form.submit "bold", hidden: true, class: "bold-button" %>
 
     <% end %>   
+    <%= button_to "delete", active_markdown.fragment_path(fragment), method: :delete, hidden: true, class: "delete-fragment-button" %>
 
     <!-- <a href="" data-controller="fragment" data-action="fragment#toggleChangeMenu" class="fragment-menu-button">
       <span class="material-symbols-outlined">

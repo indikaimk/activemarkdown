@@ -5,6 +5,5 @@ const customSchema = {
   keyMappings: { ...defaultSchema.keyMappings, backspace: "@" },
 }
 
-const application = Application.start(document.documentElement, customSchema)
-
-export {application}
+const application = Application.start(document.documentElement, customSchema);
+export {application};
